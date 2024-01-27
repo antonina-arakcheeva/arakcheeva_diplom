@@ -1,0 +1,18 @@
+#1 запрос
+
+SELECT c.login.COUNT(o.id) AS "Количество"
+FROM "Couriers" AS cour
+INNER JOIN "Orders" AS ord ON cour.Id = ord."courierId"
+WHERE ord."inDelivery" = true
+GROUP BY cour.login;
+
+#2 запрос
+
+SELECT track,
+CASE
+WHEN finished = true THEN 2
+WHEN cancelled = true THEN -1
+WHEN "inDelivery" = true THEN 1
+ELSE 0
+END
+FROM "Orders";
